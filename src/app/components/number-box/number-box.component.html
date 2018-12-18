@@ -1,0 +1,25 @@
+<div class="instruction">
+    <label>
+        Please enters integers or floating point numbers.
+      </label>
+      <br/>
+      <label>
+      Default range is -1000 to 1000. Kindly provide the minimum and maximum values to specifiy the range
+      </label>
+      <br/>
+      <label>Minimum</label>
+      <input type="text" [(ngModel)]="min">
+      <br/>
+      <label>Maximum</label>
+      <input type="text" [(ngModel)]="max">
+  </div>
+<div class="input-wrapper">
+  <input type="text" OnlyNumber class="form-control input-box" [(ngModel)]="input">
+  <span class="fa-stack input-icon">
+    <i (click)="input=updateValue(input,true)"class="fas fa-caret-square-up input-icon"></i>
+    <i (click)="input=updateValue(input,false)" class="fas fa-caret-square-down input-icon"></i>
+  </span>
+</div>
+
+
+
