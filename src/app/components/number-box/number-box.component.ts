@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -10,7 +10,11 @@ export class NumberBoxComponent implements OnInit {
 
   @Input() min;
   @Input() max;
+  @Input() step;
 
+  @Output() onValueChange:EventEmitter<any> = new EventEmitter();
+
+  public input: number;
 
   constructor() { }
 
@@ -21,21 +25,27 @@ export class NumberBoxComponent implements OnInit {
     if (this.max === undefined) {
       this.max = 1000;
     }
+    if (this.step === undefined) {
+      this.step = 1;
+    }
+    if (this.input === undefined) {
+      this.input = (parseInt(this.max, 10) + parseInt(this.min, 10)) / 2;
+    }
+    this.onValueChange.emit(this.input);
   }
 
-  updateValue(value, flag) {
-    if (parseInt(value, 10) >= this.max) {
-      value = this.max;
+  updateValue(value: any, flag: any, step: any) {
+    value = parseInt(value, 10);
+    step = parseInt(step, 10);
+    this.max = parseInt(this.max, 10);
+    this.min = parseInt(this.min, 10);
+    if (flag) {
+      value = value + step;
+    } else {
+      value = value - step;
     }
-    if (parseInt(value, 10) <= this.min) {
-      value = this.min;
-    }
-    if (flag && parseInt(value, 10) < this.max) {
-      value++;
-    }
-    if (!flag && parseInt(value, 10) > this.min) {
-      value--;
-    }
+    value = Math.min(this.max, Math.max(this.min, value));
+    this.onValueChange.emit(value);
     return value;
   }
 }

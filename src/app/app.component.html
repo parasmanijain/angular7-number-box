@@ -1,2 +1,42 @@
 
-<app-number-box [min]="min" [max]="max"></app-number-box>
+
+<div class="instruction">
+
+    <label>
+        The conventional html input type="number" provided by renders differently
+        on browser and doesn't restrict the user to provide number only input.
+    </label>
+    <br/>
+    <input type="number">
+    <br/>
+    <label>
+        Number box created using Angular 6, CSS, Bootstrap and Font-Awesome have similar behavior on all browsers.
+    </label>
+    <br/>
+    <label>
+        Please enters integers or floating point numbers.
+      </label>
+      <br/>
+      <label>
+      Default range is -1000 to 1000. Kindly provide the minimum and maximum values to specifiy the range
+      </label>
+      <br/>
+      <label>
+      Default step is 1. Kindly provide the  value to specifiy the step
+      </label>
+      <br/>
+      <label>Minimum</label>
+      <input type="text" OnlyNumber [(ngModel)]="min">
+      <br/>
+      <label>Maximum</label>
+      <input type="text" OnlyNumber [(ngModel)]="max">
+      <br/>
+      <label>Step</label>
+      <input type="text" OnlyNumber [(ngModel)]="step">
+      <br/>
+      <label>
+          Result : {{value}}
+      </label>
+  </div>
+
+<app-number-box [min]="min" [max]="max" [step]="step" (onValueChange)="onValueChange($event)"></app-number-box>

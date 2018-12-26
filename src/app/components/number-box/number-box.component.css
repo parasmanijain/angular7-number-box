@@ -4,33 +4,29 @@
   }
   
   .fa-stack .fa-caret-square-down {
-    bottom: 0.1em;
+    bottom: 2px !important;
   }
   
   .fa-stack .fa-caret-square-up {
-    top: 0.1em;
+    top: 2px !important;
   }
 
   .input-wrapper {
     position: relative;
-    padding:0.2em;
-    width: fit-content;
+    padding:2px;
+    width: 100px;
     height:35px;
-    margin:0.5em;
+    margin:2px;
 }
 
 .input-icon {
     position: absolute;
-    left: calc(75% - 0.3em);
-    top: calc(50% - 0.5em); /* Keep icon in center of input, regardless of the input height */
+    right:3%;
+    bottom:0%; /* Keep icon in center of input, regardless of the input height */
 }
 
 .input-box {
-    padding: 0.1em;
+    padding: 2px;
     height:35px;
-    width:fit-content;
-}
-
-.instruction {
-  margin: 1em;
+    width:100px;
 }
