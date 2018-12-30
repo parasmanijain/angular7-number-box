@@ -1,27 +1,179 @@
 # NumberBox
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
+Number Box created using Font-Awesome, Bootstrap and Angular 7 to provide consistent behavior across multiple browsers
 
-## Development server
+![alt text](img/input-type-number-issues.png)
+![alt text](img/input-type-number-issues-2.png)
+![alt text](img/chrome-number-box.jpg)
+![alt text](img/edge-number-box.jpg)
+![alt text](img/firefox-number-box.jpg)
+![alt text](img/ie11-number-box.jpg)
+![alt text](img/opera-number-box.jpg)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Demo
 
-## Code scaffolding
+Checkout the demo on StackBlitz - https://angular7-number-box.stackblitz.io/ 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Adding the component in your project
 
-## Build
+### Add Component and Directives in module
+Import
+`
+import { NumberBoxComponent } from './components/number-box/number-box.component';
+import { OnlyNumberDirective } from './directives/only-number.directive';
+`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Declaration
+`
+declarations: [
+    NumberBoxComponent,
+    OnlyNumberDirective
+  ]
+`
 
-## Running unit tests
+### Add selector in HTML
+```
+<app-number-box [min]="min" [max]="max" [step]="step" (onValueChange)="onValueChange($event)"></app-number-box>
+```
+### Selector Properties
+Property `min`, `max` and `step` accept numeric values.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### number-box.component.ts
+``` typescript
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+@Component({
+  selector: 'app-number-box',
+  templateUrl: './number-box.component.html',
+  styleUrls: ['./number-box.component.css']
+})
+export class NumberBoxComponent implements OnInit {
 
-## Further help
+  @Input() min;
+  @Input() max;
+  @Input() step;
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+  @Output() onValueChange:EventEmitter<any> = new EventEmitter();
+
+  public input: number;
+
+  constructor() { }
+
+  ngOnInit() {
+    if (this.min === undefined) {
+      this.min = -1000;
+    }
+    if (this.max === undefined) {
+      this.max = 1000;
+    }
+    if (this.step === undefined) {
+      this.step = 1;
+    }
+    if (this.input === undefined) {
+      this.input = (parseInt(this.max, 10) + parseInt(this.min, 10)) / 2;
+    }
+    this.onValueChange.emit(this.input);
+  }
+
+  updateValue(value: any, flag: any, step: any) {
+    value = parseInt(value, 10);
+    step = parseInt(step, 10);
+    this.max = parseInt(this.max, 10);
+    this.min = parseInt(this.min, 10);
+    if (flag) {
+      value = value + step;
+    } else {
+      value = value - step;
+    }
+    value = Math.min(this.max, Math.max(this.min, value));
+    this.onValueChange.emit(value);
+    return value;
+  }
+}
+```
+
+### number-box.component.html
+``` html
+<div class="input-wrapper">
+  <input type="text" OnlyNumber class="form-control input-box" [(ngModel)]="input">
+  <span class="fa-stack input-icon">
+    <i (click)="input=updateValue(input,true, step)"class="fas fa-caret-square-up input-icon"></i>
+    <i (click)="input=updateValue(input,false, step)" class="fas fa-caret-square-down input-icon"></i>
+  </span>
+</div>
+```
+
+### number-box.component.css
+``` css
+.fa-stack {
+    text-align: center;
+    color:grey;
+  }
+  
+  .fa-stack .fa-caret-square-down {
+    bottom: 2px !important;
+  }
+  
+  .fa-stack .fa-caret-square-up {
+    top: 2px !important;
+  }
+
+  .input-wrapper {
+    position: relative;
+    padding:2px;
+    width: 100px;
+    height:35px;
+    margin:2px;
+}
+
+.input-icon {
+    position: absolute;
+    right:3%;
+    bottom:0%;
+}
+
+.input-box {
+    padding: 2px;
+    height:35px;
+    width:100px;
+}
+```
+### only-number.directive
+``` typescript
+import { Directive, ElementRef, HostListener, Input  } from '@angular/core';
+
+@Directive({
+  selector: '[OnlyNumber]'
+})
+export class OnlyNumberDirective {
+
+ // Allow decimal numbers and negative values
+ private regex: RegExp = new RegExp(/^-?[0-9]+(\.[0-9]*){0,1}$/g);
+ // Allow key codes for special events. Reflect :
+ // Backspace, tab, end, home
+ private specialKeys: Array<string> = [ 'Backspace', 'Tab', 'End', 'Home', '-' ];
+
+  constructor(private el: ElementRef) {
+  }
+
+  @HostListener('keydown', [ '$event' ])
+
+  onKeyDown(event: KeyboardEvent) {
+
+    // Allow Backspace, tab, end, and home keys
+    if (this.specialKeys.indexOf(event.key) !== -1) {
+      return;
+    }
+
+    const current: string = this.el.nativeElement.value;
+    const next: string = current.concat(event.key);
+    if (next && !String(next).match(this.regex)) {
+      event.preventDefault();
+    }
+  }
+}
+```
+## Author
+
+parasmani.jain2208@gmail.com
