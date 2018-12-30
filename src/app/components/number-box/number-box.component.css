@@ -22,7 +22,7 @@
 .input-icon {
     position: absolute;
     right:3%;
-    bottom:0%; /* Keep icon in center of input, regardless of the input height */
+    bottom:0%;
 }
 
 .input-box {
