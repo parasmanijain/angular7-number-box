@@ -35,6 +35,9 @@ export class NumberBoxComponent implements OnInit {
   }
 
   updateValue(value: any, flag: any, step: any) {
+    if (value === '') {
+      value = 0;
+    }
     value = parseInt(value, 10);
     step = parseInt(step, 10);
     this.max = parseInt(this.max, 10);

@@ -10,6 +10,9 @@ export class AppComponent {
   public min: any;
   public max: any;
   public step: any;
+  public min0 = -1000;
+  public max0 = 1000;
+  public step0 = 1;
 
   public value;
 
