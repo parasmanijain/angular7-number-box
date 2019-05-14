@@ -1,16 +1,3 @@
-.fa-stack {
-    text-align: center;
-    color:grey;
-  }
-  
-  .fa-stack .fa-caret-square-down {
-    bottom: 2px !important;
-  }
-  
-  .fa-stack .fa-caret-square-up {
-    top: 2px !important;
-  }
-
   .input-wrapper {
     position: relative;
     padding:2px;
@@ -22,11 +9,26 @@
 .input-icon {
     position: absolute;
     right:3%;
-    bottom:0%;
+    bottom: 40%;
 }
 
 .input-box {
     padding: 2px;
     height:35px;
     width:100px;
+}
+
+.up-arrow {
+  bottom:0;
+}
+
+.down-arrow {
+  top:0;
+}
+.up-arrow::after {
+  content: '\25B2';
+}
+
+.down-arrow::after {
+  content: '\25BC';
 }

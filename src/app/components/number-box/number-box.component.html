@@ -1,8 +1,8 @@
 <div class="input-wrapper">
   <input type="text" OnlyNumber class="form-control input-box" [(ngModel)]="input">
-  <span class="fa-stack input-icon">
-    <i (click)="input=updateValue(input,true, step)"class="fas fa-caret-square-up input-icon"></i>
-    <i (click)="input=updateValue(input,false, step)" class="fas fa-caret-square-down input-icon"></i>
+  <span class="input-icon">
+    <i (click)="input=updateValue(input,true, step)"class="up-arrow input-icon"></i>
+    <i (click)="input=updateValue(input,false, step)" class="down-arrow input-icon"></i>
   </span>
 </div>
 
