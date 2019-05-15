@@ -1,6 +1,7 @@
 # NumberBox
 
-Number Box created using Font-Awesome, Bootstrap and Angular 7 to provide consistent behavior across multiple browsers
+Number Box created using Angular 7 to provide consistent behavior across multiple browsers in comparison to the input type="number" provided by native HTML which may or may not restrict the use to enter only numbers.
+As of now, it supports only integers for step, minimum and maximum values through only number directives. However, the end user can customize it to include decimal values as well.
 
 ![alt text](img/input-type-number-issues.png)
 ![alt text](img/input-type-number-issues-2.png)
@@ -97,28 +98,15 @@ export class NumberBoxComponent implements OnInit {
 ``` html
 <div class="input-wrapper">
   <input type="text" OnlyNumber class="form-control input-box" [(ngModel)]="input">
-  <span class="fa-stack input-icon">
-    <i (click)="input=updateValue(input,true, step)"class="fas fa-caret-square-up input-icon"></i>
-    <i (click)="input=updateValue(input,false, step)" class="fas fa-caret-square-down input-icon"></i>
+  <span class="input-icon">
+    <i (click)="input=updateValue(input,true, step)"class="up-arrow input-icon"></i>
+    <i (click)="input=updateValue(input,false, step)" class="down-arrow input-icon"></i>
   </span>
 </div>
 ```
 
 ### number-box.component.css
 ``` css
-.fa-stack {
-    text-align: center;
-    color:grey;
-  }
-  
-  .fa-stack .fa-caret-square-down {
-    bottom: 2px !important;
-  }
-  
-  .fa-stack .fa-caret-square-up {
-    top: 2px !important;
-  }
-
   .input-wrapper {
     position: relative;
     padding:2px;
@@ -130,7 +118,7 @@ export class NumberBoxComponent implements OnInit {
 .input-icon {
     position: absolute;
     right:3%;
-    bottom:0%;
+    bottom: 40%;
 }
 
 .input-box {
@@ -138,6 +126,22 @@ export class NumberBoxComponent implements OnInit {
     height:35px;
     width:100px;
 }
+
+.up-arrow {
+  bottom:0;
+}
+
+.down-arrow {
+  top:0;
+}
+.up-arrow::after {
+  content: '\25B2';
+}
+
+.down-arrow::after {
+  content: '\25BC';
+}
+
 ```
 ### only-number.directive
 ``` typescript
