@@ -1,6 +1,6 @@
 # NumberBox
 
-Number Box created using Angular 7 to provide consistent behavior across multiple browsers in comparison to the input type="number" provided by native HTML which may or may not restrict the use to enter only numbers.
+Number Box created using Angular 8 to provide consistent behavior across multiple browsers in comparison to the input type="number" provided by native HTML which may or may not restrict the use to enter only numbers.
 As of now, it supports only integers for step, minimum and maximum values through only number directives. However, the end user can customize it to include decimal values as well.
 
 ![alt text](img/input-type-number-issues.png)
@@ -13,7 +13,7 @@ As of now, it supports only integers for step, minimum and maximum values throug
 
 ## Demo
 
-Checkout the demo on StackBlitz - https://angular7-number-box.stackblitz.io/ 
+Checkout the demo on StackBlitz - https://angular8-number-box.stackblitz.io/ 
 
 ## Adding the component in your project
 
