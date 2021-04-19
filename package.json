@@ -21,7 +21,7 @@
     "@angular/router": "~8.1.0",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.5.0",
-    "rxjs": "~6.5.2",
+    "rxjs": "~6.6.7",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.9.1"
   },
